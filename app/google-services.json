@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "346962206084",
+    "firebase_url": "https://luckyspinner-b6730.firebaseio.com",
+    "project_id": "luckyspinner-b6730",
+    "storage_bucket": "luckyspinner-b6730.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346962206084:android:44e0cecd20cd520cec91d1",
+        "android_client_info": {
+          "package_name": "com.luckyspinner.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346962206084-jvbsi59sruagmvrf7t98bit4dkpitkju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAME3F2pEtlMRKLPEatpA9AdZAnm9aOLnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346962206084-jvbsi59sruagmvrf7t98bit4dkpitkju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

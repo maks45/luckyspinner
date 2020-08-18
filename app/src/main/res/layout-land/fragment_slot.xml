@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragemnts.SlotFragment">
+
+    <!--need some nice frame there-->
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="190dp"
+        android:layout_centerInParent="true"
+        android:background="#fff"
+        />
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="170dp"
+        android:layout_centerInParent="true"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/wheel_01"
+            layout="@layout/slot_part" />
+
+        <View
+            android:layout_height="match_parent"
+            android:layout_width="2dp"
+            />
+
+        <include
+            android:id="@+id/wheel_02"
+            layout="@layout/slot_part" />
+
+        <View
+            android:layout_height="match_parent"
+            android:layout_width="2dp"
+            />
+
+        <include
+            android:id="@+id/wheel_03"
+            layout="@layout/slot_part" />
+
+    </LinearLayout>
+
+</RelativeLayout>
