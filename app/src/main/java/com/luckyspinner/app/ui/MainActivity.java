@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
-
 import com.facebook.FacebookSdk;
 import com.facebook.applinks.AppLinkData;
 import com.luckyspinner.app.R;
@@ -29,12 +28,18 @@ public class MainActivity extends AppCompatActivity {
         webViewFragment = new WebViewFragment(() -> {
             changeFragment(slotFragment);
         }, AppLinkData.createFromAlApplinkData(getIntent()));
-        changeFragment(slotFragment);
+        changeFragment(webViewFragment);
     }
 
     private void changeFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, fragment);
         fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppEventsLogger.activateApp(getApplication());
     }
 }

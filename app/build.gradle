@@ -67,4 +67,8 @@ dependencies {
 
     //onesignal
     implementation 'com.onesignal:OneSignal:3.15.2'
+
+    //yandex metrica
+    implementation 'com.yandex.android:mobmetricalib:3.15.0'
+
 }

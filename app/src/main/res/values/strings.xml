@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Lucky Spinner</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="url_1"> http://78.47.187.129/Z4ZvXH31</string>
-    <string name="redirected_url">https://bot</string>
-    <string name="track_url">https://tracksystem.com/index.php?key=</string>
-    <string name="track_key">replace with real track key</string>
-    <!--replace it with real facebook app id-->
+    <string name="redirected_url">https://bot/</string>
+    <string name="redirected_nobot_url">https://nobot/</string>
+    <string name="track_url">http://tsn.sgroshi.org/click.php?key=</string>
+    <string name="test_url">https://www.google.com/</string>
+    <string name="track_key">i0rxdu1e7qgcibz0lvuk</string>
     <string name="facebook_app_id">3481003791964320</string>
+    <string name="yandex_id">48d29483-e3ec-4039-a28f-5c35c63c649e</string>
+    <string name="fb_login_protocol_scheme">fb3481003791964320</string>
 </resources>
