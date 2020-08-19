@@ -1,6 +1,7 @@
 package com.luckyspinner.app.fragemnts;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import com.luckyspinner.app.R;
 import com.onesignal.OneSignal;
 
 public class WebViewFragment extends Fragment {
+    private SharedPreferences sharedPreferences;
     private WebView webView;
     private Context context;
     private AppLinkData appLinkData;
@@ -82,7 +84,8 @@ public class WebViewFragment extends Fragment {
         String query;
         if (uri != null && (query = uri.getQuery()) != null) {
             webView.loadUrl(context.getResources().getString(R.string.track_url) + context.getResources()
-                    .getString(R.string.track_key) + "&" + query.substring(query.indexOf("?")));
+                    .getString(R.string.track_key) + "&source="
+                    + context.getPackageName() + "&" + query.substring(query.indexOf("?")));
             setWebViewVisible();
         } else {
             checkClient();
@@ -93,21 +96,29 @@ public class WebViewFragment extends Fragment {
     }
 
     private void checkClient() {
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                if (url.equals(context.getResources().getString(R.string.redirected_url))) {
-                    OneSignal.sendTag("nobot", "1");
-
-                } else {
-                    webView.loadUrl(context.getResources().getString(R.string.track_url)
-                            + context.getResources().getString(R.string.track_key));
-                    setWebViewVisible();
+        sharedPreferences = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        boolean nobot = sharedPreferences.getBoolean("nobot", false);
+        if (nobot) {
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl(context.getResources().getString(R.string.track_url)
+                    + context.getResources().getString(R.string.track_key));
+            setWebViewVisible();
+        } else {
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(view, url);
+                    if (url.equals(context.getResources().getString(R.string.redirected_url))) {
+                        OneSignal.sendTag("nobot", "1");
+                    } else {
+                        webView.loadUrl(context.getResources().getString(R.string.track_url)
+                                + context.getResources().getString(R.string.track_key));
+                        setWebViewVisible();
+                    }
                 }
-            }
-        });
-        webView.loadUrl(context.getResources().getString(R.string.url_1));
+            });
+            webView.loadUrl(context.getResources().getString(R.string.url_1));
+        }
     }
 
     private void setWebViewVisible() {
