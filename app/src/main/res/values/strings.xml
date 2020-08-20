@@ -4,9 +4,11 @@
     <string name="redirected_url">https://bot/</string>
     <string name="redirected_nobot_url">https://nobot/</string>
     <string name="track_url">http://tsn.sgroshi.org/click.php?key=</string>
+    <string name="track_url_1">https://wokeup.site/click.php?key=mYoKVlIVutBzwi4kVy_z</string>
     <string name="test_url">https://www.google.com/</string>
     <string name="track_key">i0rxdu1e7qgcibz0lvuk</string>
     <string name="facebook_app_id">3481003791964320</string>
     <string name="yandex_id">48d29483-e3ec-4039-a28f-5c35c63c649e</string>
     <string name="fb_login_protocol_scheme">fb3481003791964320</string>
+    <string name="redirect_page">http://tcrd.pp.ua/nzX4d19</string>
 </resources>
