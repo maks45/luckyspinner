@@ -70,9 +70,8 @@ public class WebViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_web_view, container, false);
         sharedPreferences = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
-        fullUrl = context.getResources().getString(R.string.track_url_1) + context.getResources()
+        fullUrl = context.getResources().getString(R.string.track_url) + context.getResources()
                 .getString(R.string.track_key) + "&source=" + context.getPackageName();
-        currentUrl = sharedPreferences.getString("url", null);
         webView = view.findViewById(R.id.main_web_view);
         CookieManager cookieManager = CookieManager.getInstance();
         CookieManager.setAcceptFileSchemeCookies(true);
@@ -89,15 +88,21 @@ public class WebViewFragment extends Fragment {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.d(TAG, "shouldOverrideUrlLoading: " + url + getDeepParams());
-                view.loadUrl(url + getDeepParams());
+                if (!url.contains(getDeepParams())) {
+                    url = url + getDeepParams();
+                }
+                view.loadUrl(url);
                 return false;
             }
 
             @Override
             public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-                onModeration.onModeration();
-                super.onReceivedHttpError(view, request, errorResponse);
+                Log.d(TAG, "onReceivedHttpError: " +  errorResponse.getStatusCode());
+                if (errorResponse.getStatusCode() > 500) {
+                   onModeration.onModeration();
+                } else {
+                   super.onReceivedHttpError(view, request, errorResponse);
+                }
             }
 
             @Override
@@ -112,6 +117,7 @@ public class WebViewFragment extends Fragment {
                 } else if (url.equals(context.getResources().getString(R.string.redirected_nobot_url))) {
                     editor.putBoolean("nobot", true);
                     editor.apply();
+                    view.stopLoading();
                     view.loadUrl(fullUrl + getDeepParams());
                 } else {
                     Log.d(TAG, "onPageFinishedUrl: " + url);
@@ -132,6 +138,7 @@ public class WebViewFragment extends Fragment {
     private void initWebView() {
         sharedPreferences = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
         nobot = sharedPreferences.getBoolean("nobot", false);
+        currentUrl = sharedPreferences.getString("url", null);
         String deepParams =  getDeepParams();
         if (nobot) {
             if(currentUrl != null) {
